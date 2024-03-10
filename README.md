@@ -9,3 +9,7 @@ Created lab files with spring initializer
 ```
 Four packages created and config files in place
 ```
+### Part D:
+```
+Entity classes and enum class completed
+```
