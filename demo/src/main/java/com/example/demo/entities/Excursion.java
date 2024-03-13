@@ -3,26 +3,17 @@ package com.example.demo.entities;
 import java.math.BigDecimal;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import java.sql.Date;
-import java.util.HashSet;
+import java.util.Date;
 import java.util.Set;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "excursions")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Excursion {
 
     @Id
@@ -47,15 +38,11 @@ public class Excursion {
     @Column(name = "last_update")
     private Date last_update;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vacation_id")
     private Vacation vacation;
 
     @ManyToMany(mappedBy = "excursions")
-    private Set<CartItem> cartitems = new HashSet<>();
-
-    public Excursion() {
-
-    }
+    private Set<CartItem> cartitems;
 
 }

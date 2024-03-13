@@ -3,24 +3,17 @@ package com.example.demo.entities;
 import java.math.BigDecimal;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Set;
-
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "vacations")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Vacation {
 
     @Id
@@ -48,11 +41,7 @@ public class Vacation {
     @Column(name = "last_update")
     private Date last_update;
 
-    @OneToMany(mappedBy = "vacation", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "vacation", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Excursion> excursions;
-
-    public Vacation() {
-
-    }
 
 }

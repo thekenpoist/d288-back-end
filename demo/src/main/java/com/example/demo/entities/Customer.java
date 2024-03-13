@@ -2,27 +2,19 @@ package com.example.demo.entities;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import java.sql.Date;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import jakarta.persistence.*;
+import lombok.*;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name = "customers")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Customer {
 
     @Id
@@ -53,7 +45,7 @@ public class Customer {
     @Column(name = "last_update")
     private Date last_update;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "division_id")
     private Division division;
 
@@ -69,19 +61,6 @@ public class Customer {
             carts.add(cart);
             cart.setCustomer(this);
         }
-    }
-
-    public Customer() {
-    }
-
-    public Customer(String firstName, String lastName, String address, String postal_code, String phone,
-            Division division) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.postal_code = postal_code;
-        this.phone = phone;
-        this.division = division;
     }
 
 }

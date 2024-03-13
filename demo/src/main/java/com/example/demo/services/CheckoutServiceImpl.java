@@ -28,25 +28,31 @@ public class CheckoutServiceImpl implements CheckoutService {
     @Transactional
     public PurchaseResponse placeOrder(Purchase purchase) {
 
-        Cart cart = purchase.getCart();
+        try {
 
-        String orderTrackingNumber = generateOrderTrackingNumber();
-        cart.setOrderTrackingNumber(orderTrackingNumber);
+            Cart cart = purchase.getCart();
 
-        Set<CartItem> cartItem = purchase.getCartItem();
-        cartItem.forEach(item -> cart.add(item));
+            String orderTrackingNumber = generateOrderTrackingNumber();
+            cart.setOrderTrackingNumber(orderTrackingNumber);
 
-        Customer customer = purchase.getCustomer();
-        customer.add(cart);
+            Set<CartItem> cartItem = purchase.getCartItem();
+            cartItem.forEach(item -> cart.add(item));
+            cart.setStatus(StatusType.ordered);
 
-        cart.setStatus(StatusType.ordered);
-
-        if (purchase.getCartItem().isEmpty() || purchase.getCart() == null || purchase.getCustomer() == null) {
-            return new PurchaseResponse("You cannot check out an empty cart.");
-        }
-        else {
+            Customer customer = purchase.getCustomer();
+            customer.add(cart);
             cartRepository.save(cart);
-            return new PurchaseResponse(orderTrackingNumber);
+
+            if (purchase.getCartItem().isEmpty()) {
+                return new PurchaseResponse("You cannot check out an empty cart.");
+            }
+            else {
+                cartRepository.save(cart);
+                return new PurchaseResponse(orderTrackingNumber);
+            }
+        }
+        catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Cart is empty!");
         }
 
     }

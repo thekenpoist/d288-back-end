@@ -26,4 +26,3 @@ Added "add" methods to entity packages: Cart & Customer
 ```
 Code validation added to CheckoutServiceImpl & Customer
 ```
-
