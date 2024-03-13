@@ -9,6 +9,7 @@ import java.util.Set;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -47,9 +48,9 @@ public class Division {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "division")
     private Set<Customer> customers = new HashSet<>();
 
-    @ManyToOne
-    @JoinColumn(name = "country_id")
-    private Country country;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "country_id", nullable = false, insertable = false, updatable = false)
+    Country country;
 
     public void setCountry(Country country) {
         setCountry_id(country.getId());

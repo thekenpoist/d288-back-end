@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import java.sql.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -50,7 +49,7 @@ public class Vacation {
     private Date last_update;
 
     @OneToMany(mappedBy = "vacation", cascade = CascadeType.ALL)
-    private Set<Excursion> excursions = new HashSet<>();
+    private Set<Excursion> excursions;
 
     public Vacation() {
 

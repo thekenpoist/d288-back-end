@@ -13,3 +13,17 @@ Four packages created and config files in place
 ```
 Entity classes and enum class completed
 ```
+### Part E:
+```
+Code for the dao packages completed
+```
+### Part F:
+```
+Created services packages: Purchase, PurchaseResponse, CheckoutService, CheckoutServiceImpl per requirements.
+Added "add" methods to entity packages: Cart & Customer
+```
+### Part G:
+```
+Code validation added to CheckoutServiceImpl & Customer
+```
+
