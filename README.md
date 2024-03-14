@@ -26,3 +26,12 @@ Added "add" methods to entity packages: Cart & Customer
 ```
 Code validation added to CheckoutServiceImpl & Customer
 ```
+### Part H:
+```
+Code written for the controllers Package that includes a REST controller checkout controller
+With post mapping to place orders
+```
+### Part I:
+```
+Created BootStrapData.java to add five sample customers programmatically
+```
